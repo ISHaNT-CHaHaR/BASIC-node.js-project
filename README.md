@@ -1,2 +1,2 @@
-# BASIC-node.js-project
-A node.js application for better understanding of node fundamentals.
+# Basic-API
+A simple API for templaing.
