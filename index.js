@@ -25,7 +25,7 @@ console.log("will read file!");
 
 ///////////////////////////////////////////////////////////////////////////////////////////
 
-//////////////////////FUNCTION FOR OVERVIEW/////////////////////
+//////////////////////FUNCTION FOR OVERVIEW & PRODUCT/////////////////////
  const replaceTemplate=(temp,product)=>{
      let output = temp.replace(/{%PRODUCTNAME%}/g,product.productName);
      output=output.replace(/{%IMAGE%}/g,product.image); 
@@ -54,10 +54,10 @@ const tempProduct =  fs.readFileSync(`${__dirname}/templates/product.html`,'utf-
            
 ///////////////////////////////SERVER CREATED////////////////////////////////////////           
 const server=http.createServer((req,res)=>{
-    const {query, pathname}=url.parse(req.url,true);
+    const {query, pathname}=url.parse(req.url,true);//DESTRUCTURING.
  
 
-    //Over view PAGe.
+    //Over view PAGE.
     if(pathname === '/over'|| pathname==='/')
     {
 
