@@ -27,20 +27,30 @@ console.log("will read file!");
 //SERVER
  
 const data =  fs.readFileSync(`${__dirname}/dev-data/data.json`,'utf-8'); 
+const tempOverview =  fs.readFileSync(`${__dirname}/templates/template-overview.html`,'utf-8'); 
+const tempCard =  fs.readFileSync(`${__dirname}/templates/template-card.html`,'utf-8'); 
+const tempProduct =  fs.readFileSync(`${__dirname}/templates/product.html`,'utf-8');
+  
            const  dataObj=JSON.parse(data);
             
 const server=http.createServer((req,res)=>{
     console.log(req.url);  
     const pathname = req.url;
+
+    //Over view PAGe.
     if(pathname === '/over'|| pathname==='/')
     {
-        res.end('this is the overview');
+
+        res.writeHead(200,{'Content-type':'text/html'});
+        res.end(tempOverview);
 
     } 
-
+    /// PRODUCT PAGE
     else if(pathname==='/product'){
         res.end('product ');
     }
+
+    /// API
     else if(pathname ==='/api'){
        
             res.writeHead(200,{'Content-type':'application/json'});
@@ -49,7 +59,8 @@ const server=http.createServer((req,res)=>{
 
       
 
-        
+         //NOT FOUND...
+
        
     } else{
         res.writeHead(404);
