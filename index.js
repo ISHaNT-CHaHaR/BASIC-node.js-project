@@ -2,6 +2,7 @@
 const fs= require('fs');
 const http= require('http');
 const url= require('url');
+const slugify= require('slugify');
 const replaceTemplate  = require('./modules/replaceTemplate')
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -36,11 +37,15 @@ const tempOverview =  fs.readFileSync(`${__dirname}/templates/template-overview.
 const tempCard =  fs.readFileSync(`${__dirname}/templates/template-card.html`,'utf-8'); 
 const tempProduct =  fs.readFileSync(`${__dirname}/templates/product.html`,'utf-8');
   
-           const  dataObj=JSON.parse(data);//ONJECT CREATED FOR JSON DATA.
+           const  dataObj=JSON.parse(data);//OBJECT CREATED FOR JSON DATA.
 
+const slugs= dataObj.map(el=> el.price);////for extracting slugs.
+console.log(slugs); 
+           console.log(slugify('Fresh avocados',{lower : true}));
            
 ///////////////////////////////SERVER CREATED////////////////////////////////////////           
 const server=http.createServer((req,res)=>{
+
     const {query, pathname}=url.parse(req.url,true);//DESTRUCTURING.
  
 
@@ -64,7 +69,7 @@ const server=http.createServer((req,res)=>{
         res.end(output);
     }
 
-    /// API
+    /// API//////////////////////////////////
     else if(pathname ==='/api'){
        
             res.writeHead(200,{'Content-type':'application/json'});
@@ -78,7 +83,7 @@ const server=http.createServer((req,res)=>{
        
     } else{
         res.writeHead(404);
-        res.end('<h1> page not found!</h1>');
+        res.end('<h1> page not found!!</h1>');
     }
    
 });
